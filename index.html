@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yang — Artist Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff;--text:#1a1a1a;--muted:#666;--pink:#e91e8c;--green:#4caf50;--border:#e8e8e8}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a1a;line-height:1.6}
+header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,0.98);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+nav{max-width:1400px;margin:0 auto;padding:1.2rem 3rem;display:flex;align-items:center;justify-content:space-between}
+.logo img{height:45px;width:auto;display:block}
+.nav-links{display:flex;gap:3rem;list-style:none}
+.nav-links a{color:var(--text);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;transition:color 0.3s}
+.nav-links a:hover{color:var(--pink)}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:10rem 2rem 5rem}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,7vw,6rem);font-weight:400;margin-bottom:1.5rem;letter-spacing:1px;line-height:1.1}
+.hero h1 .freedom{background:linear-gradient(90deg,var(--pink),#ff6b9d);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:1.1rem;color:var(--muted);max-width:600px;margin-bottom:3rem}
+.hero-buttons{display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center}
+.btn-view{padding:1.2rem 2.5rem;background:linear-gradient(135deg,var(--green),var(--pink));color:white;text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;border:none;transition:transform 0.3s,box-shadow 0.3s}
+.btn-view:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(233,30,140,0.3)}
+.btn-touch{padding:1.2rem 2.5rem;background:transparent;color:var(--text);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;border:1px solid var(--border);transition:all 0.3s}
+.btn-touch:hover{border-color:var(--pink);color:var(--pink)}
+.section{max-width:1400px;margin:0 auto;padding:4rem 2rem}
+.section-title{font-family:'Playfair Display',serif;font-size:3rem;font-weight:400;margin-bottom:1rem;text-align:center;letter-spacing:1px}
+.section-title .gradient{background:linear-gradient(90deg,var(--green),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.section-subtitle{text-align:center;color:var(--muted);font-size:1rem;margin-bottom:3rem}
+.filter-buttons{display:flex;gap:1rem;justify-content:center;margin-bottom:3rem;flex-wrap:wrap}
+.filter-btn{padding:0.8rem 2rem;background:transparent;border:1px solid var(--border);color:var(--text);font-size:0.8rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;font-family:'Inter',sans-serif}
+.filter-btn.active,.filter-btn:hover{background:linear-gradient(135deg,var(--green),var(--pink));color:white;border-color:transparent}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:2rem}
+.artwork{background:white;border-radius:12px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.08);transition:transform 0.3s,box-shadow 0.3s;cursor:pointer}
+.artwork:hover{transform:translateY(-5px);box-shadow:0 15px 40px rgba(0,0,0,0.15)}
+.artwork .img-frame{padding:12px;background:white}
+.artwork img{width:100%;height:380px;object-fit:cover;display:block;border:1px solid #f0f0f0}
+.artwork-info{padding:1.5rem;text-align:center}
+.artwork-info h3{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:400;margin-bottom:0.5rem}
+.artwork-info p{color:var(--muted);font-size:0.9rem;margin-bottom:1rem;font-style:italic}
+.category-tag{display:inline-block;padding:0.4rem 1.2rem;background:linear-gradient(135deg,var(--green),var(--pink));color:white;font-size:0.75rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;border-radius:20px}
+.guardian-section{background:#fafafa;padding:6rem 2rem;text-align:center}
+.guardian-section h2{font-family:'Playfair Display',serif;font-size:3rem;margin-bottom:1.5rem}
+.guardian-section h2 .gradient{background:linear-gradient(90deg,var(--green),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.guardian-image{max-width:350px;margin:0 auto}
+.guardian-image img{width:100%;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,0.1)}
+.resume-section{max-width:1000px;margin:0 auto;padding:6rem 2rem}
+.resume-content{display:flex;align-items:center;gap:4rem}
+.resume-text{flex:1}
+.resume-text h2{font-family:'Playfair Display',serif;font-size:2.5rem;margin-bottom:2rem}
+.resume-text h2 .gradient{background:linear-gradient(90deg,var(--green),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.resume-text p{color:var(--muted);font-size:1.1rem;line-height:1.8;margin-bottom:1.5rem}
+.contact-section{background:#fafafa;padding:6rem 2rem;text-align:center}
+.contact-section h2{font-family:'Playfair Display',serif;font-size:3rem;margin-bottom:1rem}
+.contact-section h2 .gradient{background:linear-gradient(90deg,var(--green),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.contact-section p{color:var(--muted);font-size:1.1rem;margin-bottom:2rem}
+.contact-info{margin-top:2rem}
+.contact-info a{display:block;font-size:1.2rem;margin-bottom:1rem;text-decoration:none;transition:opacity 0.3s}
+.contact-email{color:var(--green)}.contact-phone{color:var(--text)}.contact-instagram{color:var(--pink)}
+.contact-info a:hover{opacity:0.7}
+footer{text-align:center;padding:3rem 2rem;border-top:1px solid var(--border);color:var(--muted);font-size:0.85rem}
+.lightbox{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.95);z-index:2000;justify-content:center;align-items:center;padding:2rem}
+.lightbox.active{display:flex}
+.lightbox img{max-width:90vw;max-height:90vh;object-fit:contain;border-radius:8px}
+.lightbox-close{position:absolute;top:2rem;right:2rem;color:white;font-size:2.5rem;cursor:pointer;background:none;border:none;font-family:sans-serif}
+@media(max-width:768px){nav{padding:1rem 1.5rem}.nav-links{gap:1.5rem}.logo img{height:35px}.hero{padding:8rem 1.5rem 3rem}.gallery{grid-template-columns:1fr}.resume-content{flex-direction:column;gap:2rem}.hero-buttons{flex-direction:column;width:100%;max-width:300px}}
+</style>
+</head>
+<body>
+<header><nav><a href="#" class="logo"><img src="logo.png" alt="Yang"></a><ul class="nav-links"><li><a href="#work">Work</a></li><li><a href="#guardian">Guardian</a></li><li><a href="#resume">About</a></li><li><a href="#contact">Contact</a></li></ul></nav></header>
+
+<section class="hero">
+<h1>Form Meets<br><span class="freedom">Freedom</span></h1>
+<p>Geometric precision, raw realism, and fluid abstraction — exploring the full spectrum of visual expression since 1979.</p>
+<div class="hero-buttons"><a href="#work" class="btn-view">View Work</a><a href="#contact" class="btn-touch">Get In Touch</a></div>
+</section>
+
+<section id="work" class="section">
+<p class="section-subtitle">Click any piece to view in full detail</p>
+<div class="filter-buttons">
+<button class="filter-btn active" onclick="filterAll()">All</button>
+<button class="filter-btn" onclick="filterCat('abstract')">Abstract</button>
+<button class="filter-btn" onclick="filterCat('geometric')">Geometric</button>
+<button class="filter-btn" onclick="filterCat('pointillism')">Pointillism</button>
+<button class="filter-btn" onclick="filterCat('realism')">Realism</button>
+<button class="filter-btn" onclick="filterCat('naive')">Naive</button>
+</div>
+<div class="gallery" id="gallery">
+<!-- ABSTRACT -->
+<div class="artwork" onclick="openLightbox('20260618_175333.jpg')" data-category="abstract">
+<div class="img-frame"><img src="20260618_175333.jpg" alt="Cosmic Bloom"></div>
+<div class="artwork-info"><h3>Cosmic Bloom</h3><p>An explosion of stellar color where galaxies are born and dreams take shape.</p><span class="category-tag">Abstract</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('20260618_175255.jpg')" data-category="abstract">
+<div class="img-frame"><img src="20260618_175255.jpg" alt="Cancers in Love"></div>
+<div class="artwork-info"><h3>Cancers in Love</h3><p>Two souls intertwining in liquid fire. Where passion meets vulnerability.</p><span class="category-tag">Abstract</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Above_the_Clouds.jpg')" data-category="abstract">
+<div class="img-frame"><img src="Above_the_Clouds.jpg" alt="Above the Clouds"></div>
+<div class="artwork-info"><h3>Above the Clouds</h3><p>A dreamscape where gravity surrenders to imagination.</p><span class="category-tag">Abstract</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Beautiful_Poet.jpg')" data-category="abstract">
+<div class="img-frame"><img src="Beautiful_Poet.jpg" alt="Beautiful Poet"></div>
+<div class="artwork-info"><h3>Beautiful Poet</h3><p>The silent rhythm of words made visible.</p><span class="category-tag">Abstract</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Blues.jpg')" data-category="abstract">
+<div class="img-frame"><img src="Blues.jpg" alt="Blues"></div>
+<div class="artwork-info"><h3>Blues</h3><p>The color of longing, painted in layers that whisper.</p><span class="category-tag">Abstract</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('The_Storyteller.jpg')" data-category="abstract">
+<div class="img-frame"><img src="The_Storyteller.jpg" alt="The Storyteller"></div>
+<div class="artwork-info"><h3>The Storyteller</h3><p>Every line is a sentence, every color a chapter.</p><span class="category-tag">Abstract</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Tree_monster.jpg')" data-category="abstract">
+<div class="img-frame"><img src="Tree_monster.jpg" alt="Tree Monster"></div>
+<div class="artwork-info"><h3>Tree Monster</h3><p>Where the forest whispers back.</p><span class="category-tag">Abstract</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Wave.jpg')" data-category="abstract">
+<div class="img-frame"><img src="Wave.jpg" alt="Wave"></div>
+<div class="artwork-info"><h3>Wave</h3><p>The ocean's eternal breath.</p><span class="category-tag">Abstract</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Young_Visionary.jpg')" data-category="abstract">
+<div class="img-frame"><img src="Young_Visionary.jpg" alt="Young Visionary"></div>
+<div class="artwork-info"><h3>Young Visionary</h3><p>Eyes that see tomorrow.</p><span class="category-tag">Abstract</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('chilling.jpg')" data-category="abstract">
+<div class="img-frame"><img src="chilling.jpg" alt="Chilling"></div>
+<div class="artwork-info"><h3>Chilling</h3><p>The art of stillness.</p><span class="category-tag">Abstract</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('work.jpg')" data-category="abstract">
+<div class="img-frame"><img src="work.jpg" alt="Work"></div>
+<div class="artwork-info"><h3>Work</h3><p>Creation in progress.</p><span class="category-tag">Abstract</span></div>
+</div>
+<!-- GEOMETRIC -->
+<div class="artwork" onclick="openLightbox('B-Boy.jpg')" data-category="geometric">
+<div class="img-frame"><img src="B-Boy.jpg" alt="B-Boy"></div>
+<div class="artwork-info"><h3>B-Boy</h3><p>Frozen motion. The explosive energy of street culture.</p><span class="category-tag">Geometric</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Tree.jpg')" data-category="geometric">
+<div class="img-frame"><img src="Tree.jpg" alt="Tree"></div>
+<div class="artwork-info"><h3>Tree</h3><p>Roots that remember, branches that dream.</p><span class="category-tag">Geometric</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('tomorrow.jpg')" data-category="geometric">
+<div class="img-frame"><img src="tomorrow.jpg" alt="Tomorrow"></div>
+<div class="artwork-info"><h3>Tomorrow</h3><p>Light that hasn't arrived yet.</p><span class="category-tag">Geometric</span></div>
+</div>
+<!-- POINTILLISM -->
+<div class="artwork" onclick="openLightbox('Elephant.jpg')" data-category="pointillism">
+<div class="img-frame"><img src="Elephant.jpg" alt="Elephant"></div>
+<div class="artwork-info"><h3>Elephant</h3><p>Wisdom in every dot.</p><span class="category-tag">Pointillism</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Chameleon.jpg')" data-category="pointillism">
+<div class="img-frame"><img src="Chameleon.jpg" alt="Chameleon"></div>
+<div class="artwork-info"><h3>Chameleon</h3><p>The master of becoming.</p><span class="category-tag">Pointillism</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Cabbage.jpg')" data-category="pointillism">
+<div class="img-frame"><img src="Cabbage.jpg" alt="Cabbage"></div>
+<div class="artwork-info"><h3>Cabbage</h3><p>Ordinary magic in dots.</p><span class="category-tag">Pointillism</span></div>
+</div>
+<!-- REALISM -->
+<div class="artwork" onclick="openLightbox('Best_friend.jpg')" data-category="realism">
+<div class="img-frame"><img src="Best_friend.jpg" alt="Best Friend"></div>
+<div class="artwork-info"><h3>Best Friend</h3><p>Loyalty without words.</p><span class="category-tag">Realism</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Broken_Heart.jpg')" data-category="realism">
+<div class="img-frame"><img src="Broken_Heart.jpg" alt="Broken Heart"></div>
+<div class="artwork-info"><h3>Broken Heart</h3><p>The beauty in fracture.</p><span class="category-tag">Realism</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Walk_with_Lobsters.jpg')" data-category="realism">
+<div class="img-frame"><img src="Walk_with_Lobsters.jpg" alt="Walk with Lobsters"></div>
+<div class="artwork-info"><h3>Walk with Lobsters</h3><p>Surreal companions on life's shore.</p><span class="category-tag">Realism</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('cat.jpg')" data-category="realism">
+<div class="img-frame"><img src="cat.jpg" alt="Cat"></div>
+<div class="artwork-info"><h3>Cat</h3><p>Independence personified.</p><span class="category-tag">Realism</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('too_cool.jpg')" data-category="realism">
+<div class="img-frame"><img src="too_cool.jpg" alt="Too Cool"></div>
+<div class="artwork-info"><h3>Too Cool</h3><p>Attitude as architecture.</p><span class="category-tag">Realism</span></div>
+</div>
+<!-- NAIVE -->
+<div class="artwork" onclick="openLightbox('Horse.jpg')" data-category="naive">
+<div class="img-frame"><img src="Horse.jpg" alt="Horse"></div>
+<div class="artwork-info"><h3>Horse</h3><p>Freedom in simple strokes.</p><span class="category-tag">Naive</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Tree.jpg')" data-category="naive">
+<div class="img-frame"><img src="Tree.jpg" alt="Tree"></div>
+<div class="artwork-info"><h3>Tree</h3><p>Roots that remember childhood.</p><span class="category-tag">Naive</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Tree_monster.jpg')" data-category="naive">
+<div class="img-frame"><img src="Tree_monster.jpg" alt="Tree Monster"></div>
+<div class="artwork-info"><h3>Tree Monster</h3><p>The friendly giant in the backyard.</p><span class="category-tag">Naive</span></div>
+</div>
+<!-- PHOTOS OF YOU -->
+<div class="artwork" onclick="openLightbox('Yang.jpg')" data-category="photo">
+<div class="img-frame"><img src="Yang.jpg" alt="Yang"></div>
+<div class="artwork-info"><h3>Yang</h3><p>The artist behind the vision.</p><span class="category-tag">Artist</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Yang_-_Artist_with_exhi.jpg')" data-category="photo">
+<div class="img-frame"><img src="Yang_-_Artist_with_exhi.jpg" alt="Yang - Exhibition"></div>
+<div class="artwork-info"><h3>Yang - Exhibition</h3><p>Where the work meets the world.</p><span class="category-tag">Artist</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Artist_at_Work.jpg')" data-category="photo">
+<div class="img-frame"><img src="Artist_at_Work.jpg" alt="Artist at Work"></div>
+<div class="artwork-info"><h3>Artist at Work</h3><p>Creation in real time.</p><span class="category-tag">Artist</span></div>
+</div>
+</div>
+</section>
+
+<section id="guardian" class="guardian-section">
+<h2>The <span class="gradient">Guardian</span></h2>
+<div class="guardian-image">
+<img src="guardian-frog.png" alt="The Guardian - Princess Frog" loading="lazy">
+</div>
+</section>
+
+<section id="resume" class="resume-section">
+<div class="resume-content">
+<div class="resume-text">
+<h2>About the <span class="gradient">Artist</span></h2>
+<p>Born in Alma-Ata, Kazakhstan in 1979. I picked up a brush and never put it down. My work moves between the rigid beauty of geometric structures, the honest depth of realistic portraiture, and the uncontrolled energy of abstract expression.</p>
+<p>Since 1990, based in Israel, I work across acrylics, charcoal, and mixed media — always chasing the next unexpected combination of form and feeling. Each piece is a conversation between control and chaos.</p>
+<p><strong>Yang</strong></p>
+</div>
+</div>
+</section>
+
+<section id="contact" class="contact-section">
+<h2>Get In <span class="gradient">Touch</span></h2>
+<p>Interested in collaborating or acquiring a piece? Reach out.</p>
+<div class="contact-info">
+<a href="mailto:yang@artist.com" class="contact-email">yang@artist.com</a>
+<a href="tel:+972506801313" class="contact-phone">+972 50-680-1313</a>
+<a href="https://www.instagram.com/art.yan.g?igsh=MWN4cmlmbnZxaXRjbw==" class="contact-instagram" target="_blank">Instagram</a>
+</div>
+</section>
+
+<footer><p>© 2024 Yang. All rights reserved.</p></footer>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+<button class="lightbox-close">&times;</button>
+<img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+function filterAll() {
+  document.querySelectorAll('.artwork').forEach(el => el.style.display = 'block');
+  document.querySelectorAll('.filter-btn').forEach(el => el.classList.remove('active'));
+  event.target.classList.add('active');
+}
+function filterCat(cat) {
+  document.querySelectorAll('.artwork').forEach(el => {
+    el.style.display = el.dataset.category === cat ? 'block' : 'none';
+  });
+  document.querySelectorAll('.filter-btn').forEach(el => el.classList.remove('active'));
+  event.target.classList.add('active');
+}
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('active');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+}
+</script>
+</body>
+</html>
